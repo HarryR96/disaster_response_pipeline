@@ -28,6 +28,7 @@ def clean_data(df):
     df.drop(columns=['categories'], inplace=True)
     df = pd.concat([df, categories], axis=1)
     df.drop_duplicates(inplace=True)
+    df[df.columns[4:]] = df[df.columns[4:]].replace(2, 1)
     return df
 
 def save_data(df, database_filepath):
