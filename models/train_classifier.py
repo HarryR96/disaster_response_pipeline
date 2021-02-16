@@ -1,3 +1,6 @@
+import time
+start_time = time.time()
+
 import sys
 import numpy as np
 import pandas as pd
@@ -44,7 +47,7 @@ def load_data(database_filepath):
 def tokenize(text):
         
     """Normalizes text and separates individual terms into an array of lemmatized, lower case
-    tokens without whitespace.
+    tokens without whitespace and with stopwords removed.
     
     Args:
         text (string): text to tokenize
@@ -80,6 +83,7 @@ def build_model():
     ('tfidf', TfidfTransformer()),
     ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
+    
     return model
 
 
@@ -145,6 +149,7 @@ def main():
         save_model(model, model_filepath)
 
         print('Trained model saved!')
+        print("--- %s seconds ---" % (time.time() - start_time))
 
     else:
         print('Please provide the filepath of the disaster messages database '\
