@@ -7,6 +7,14 @@ def load_data(messages_filepath, categories_filepath):
     
     """Loads CSV files into pandas DataFrame objects and merges on 'id' column
     to return single dataframe.
+    
+    Args:
+        messages_filepath (string): file to read messages data from
+        categories_filepath (string): file to read categories data from
+    
+    Returns:
+        pandas DataFrame: merged dataframe of messages and categories data
+    
     """
     
     messages = pd.read_csv(messages_filepath)
@@ -18,6 +26,13 @@ def clean_data(df):
     
     """Splits 'categories' column into separate columns per individual category,
     replaces category values with numeric binary, and removes duplicate rows.
+    
+    Args:
+        df (pandas DataFrame): data to clean
+    
+    Returns:
+        pandas DataFrame: cleaned dataframe
+    
     """
     
     categories = df['categories'].str.split(';', expand=True)
@@ -34,9 +49,17 @@ def clean_data(df):
 def save_data(df, database_filepath):
     
     """Loads cleaned data into SQLite database.
+    
+    Args:
+        df (pandas DataFrame): data to loads
+        database_filepath (string): filepath to save data to
+    
+    Returns:
+        None
+    
     """
     
-    engine = create_engine('sqlite:///{}.db'.format(database_filepath))
+    engine = create_engine('sqlite:///{}'.format(database_filepath))
     df.to_sql('messages', engine, index=False)
 
 def main():
