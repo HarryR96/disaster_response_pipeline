@@ -7,7 +7,7 @@ from nltk.tokenize import word_tokenize
 
 from flask import Flask
 from flask import render_template, request, jsonify
-from plotly.graph_objs import Bar
+from plotly.graph_objs import Bar, Pie
 from sklearn.externals import joblib
 from sqlalchemy import create_engine
 
@@ -42,26 +42,59 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+    df_melt = pd.melt(df, id_vars='id', value_vars=df.columns[5:], var_name='category', \
+                      value_name='count_message')
+    category_counts = df_melt.groupby('category').count_message.sum().reset_index()
+    new_df = df.copy()
+    new_df['sum'] = new_df[new_df.columns[4:]].sum(axis=1)
+    new_df['labeled'] = new_df['sum'].apply(lambda x: 0 if x==0 else 1)
+    label_counts = new_df.groupby('labeled').id.count().reset_index()
+    label_counts = label_counts.sort_values(by='labeled', ascending=False).reset_index()
+    label_counts.rename(columns={'id': 'count_message'}, inplace=True)
+    label_counts['labeled'] = label_counts['labeled'].map({0: 'unlabeled', 1: 'labeled'})
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [
-                Bar(
-                    x=genre_names,
-                    y=genre_counts
+                Pie(
+                    values=genre_counts,
+                    labels=genre_names,
+                    marker={'colors': ['#a2c1ec', '#e4ab7c', '#96d572']}
                 )
             ],
 
             'layout': {
-                'title': 'Distribution of Message Genres',
-                'yaxis': {
-                    'title': "Count"
-                },
-                'xaxis': {
-                    'title': "Genre"
-                }
+                'title': 'Distribution of Message Genres'
+            }
+        },
+        {
+            'data': [
+                Bar(
+                    x=label_counts['labeled'],
+                    y=label_counts['count_message'],
+                    marker={'color': '#3f7222'}
+                )
+            ],
+            
+            'layout': {
+                'title': 'Labeled vs Unlabaled Messages',
+                'yaxis': {'title': '# of Messages'}
+            }
+        },
+        {
+            'data': [
+                Bar(
+                    x=category_counts['category'],
+                    y=category_counts['count_message'],
+                    marker={'color': '#223f72'}
+                )
+            ],
+            
+            'layout': {
+                'title': 'Count of Messages per Category',
+                'yaxis': {'title': '# of Messages'}
             }
         }
     ]
