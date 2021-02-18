@@ -33,13 +33,12 @@ df = pd.read_sql_table('messages', engine)
 model = joblib.load("../models/classifier.pkl")
 
 
-# index webpage displays cool visuals and receives user input text for model
+# index webpage displays visuals and receives user input text for model
 @app.route('/')
 @app.route('/index')
 def index():
     
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     df_melt = pd.melt(df, id_vars='id', value_vars=df.columns[5:], var_name='category', \
@@ -54,7 +53,6 @@ def index():
     label_counts['labeled'] = label_counts['labeled'].map({0: 'unlabeled', 1: 'labeled'})
     
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [
