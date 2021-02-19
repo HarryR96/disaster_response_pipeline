@@ -42,9 +42,9 @@ The NLP preprocessing and model fitting were bundled into a single pipeline to b
 
 ## File Descriptions <a name="files"></a>
 
-- app: folder containing HTML files for web page and run.py file to load the data, create the visualisations and deploy the model
-- data: folder containing CSV files of the original data, data_processing.py file containing ETL pipeline, and final data set loaded into SQLite database
-- models: folder containing file to train and save model and final model in classifier.pkl
+- [app](https://github.com/harryroper96/disaster_response_pipeline/tree/master/app): folder containing HTML files for web page and run.py file to load the data, create the visualisations and deploy the model
+- [data](https://github.com/harryroper96/disaster_response_pipeline/tree/master/data): folder containing CSV files of the original data, data_processing.py file containing ETL pipeline, and final data set loaded into SQLite database
+- [models](https://github.com/harryroper96/disaster_response_pipeline/tree/master/models): folder containing file to train and save model and final model in classifier.pkl
 
 To render the dashboard locally, download and navigate to the app folder of the repository and enter the command
 
