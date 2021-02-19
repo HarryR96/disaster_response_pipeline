@@ -64,4 +64,4 @@ python run.py
 
 ## Licensing, Authors, Acknowledgements <a name="licensing"></a>
 
-The data for this project was provided by Figure Eight (now [Appen](https://appen.com/))
+The data for this project was provided by Figure Eight (now [Appen](https://appen.com/)).
