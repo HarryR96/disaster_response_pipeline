@@ -61,7 +61,6 @@ python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 `
 cd app
 `
-<br />
 `
 python run.py
 `
