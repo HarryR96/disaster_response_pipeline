@@ -49,17 +49,17 @@ The NLP preprocessing and model fitting were bundled into a single pipeline to b
 To render the dashboard locally:
 
 1. Download the repository
-2. Run the ETL pipeline:
+2. Run the ETL pipeline: <br />
 `
 python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
 `
-3. Build and train the model:
+3. Build and train the model: <br />
 `
 python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 `
-4. Launch the app:
+4. Launch the app: <br />
 `
-cd app
+cd app <br />
 python run.py
 `
 
