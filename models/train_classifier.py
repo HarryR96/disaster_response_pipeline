@@ -78,11 +78,15 @@ def build_model():
     
     """
     
-    model = Pipeline([
+    pipeline = Pipeline([
     ('vect', CountVectorizer(tokenizer=tokenize)),
     ('tfidf', TfidfTransformer()),
     ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
+    
+    parameters = {'clf__estimator__n_estimators': [10, 20]}
+    
+    model = GridSearchCV(pipeline, param_grid=parameters)
     
     return model
 
