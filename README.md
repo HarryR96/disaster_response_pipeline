@@ -57,11 +57,7 @@ python data/process_data.py data/disaster_messages.csv data/disaster_categories.
 `
 python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 `
-4. Launch the app: <br />
-`
-cd app
-`
-<br />
+4. Navigate to the app folder and launch the app: <br />
 `
 python run.py
 `
