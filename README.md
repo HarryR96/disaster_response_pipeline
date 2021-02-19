@@ -59,7 +59,10 @@ python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 `
 4. Launch the app: <br />
 `
-cd app <br />
+cd app
+`
+<br />
+`
 python run.py
 `
 
