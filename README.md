@@ -46,9 +46,20 @@ The NLP preprocessing and model fitting were bundled into a single pipeline to b
 - [data](https://github.com/harryroper96/disaster_response_pipeline/tree/master/data): folder containing CSV files of the original data, data_processing.py file containing ETL pipeline, and final data set loaded into SQLite database
 - [models](https://github.com/harryroper96/disaster_response_pipeline/tree/master/models): folder containing file to train and save model and final model in classifier.pkl
 
-To render the dashboard locally, download the repository, navigate to the app folder, and enter the command
+To render the dashboard locally:
 
+1. Download the repository
+2. Run the ETL pipeline:
 `
+python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
+`
+3. Build and train the model:
+`
+python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
+`
+4. Launch the app:
+`
+cd app
 python run.py
 `
 
